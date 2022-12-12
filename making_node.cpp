@@ -94,7 +94,7 @@ void PrintingLevelWise(TreeNode<int>*root)
     while(PendingNodes.size()!=0)
     {
         TreeNode<int>*front = PendingNodes.front();
-        cout<<front;
+        cout<<front->data<<":";
         PendingNodes.pop();
         for(int i =0; i<root->children.size(); i++)
         {
@@ -113,6 +113,18 @@ void PrintingLevelWise(TreeNode<int>*root)
 }
 
 
+//-------------count nodes---------------------------------------
+
+int CountNodes(TreeNode<int>*root)
+{
+    int CountResult{1};
+    for(int i =0; i<root->children.size(); i++)
+    {
+        CountResult+=CountNodes(root->children[i]);
+    }
+    return CountResult;
+}
+
 int main()
 {
     // TreeNode<int> *root = new TreeNode<int>(10);
@@ -123,4 +135,6 @@ int main()
     TreeNode<int> *root = takeInputLevelWise();
     PrintTree(root);
     PrintingLevelWise(root);
+    cout<<"Total number of nodes are in this tree is: ";
+    cout<<CountNodes(root);
 }
