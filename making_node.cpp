@@ -277,6 +277,22 @@ TreeNode<int>* PreOrderTraversal(TreeNode<int>* root)
     }
 }
 
+
+//-----------------------------------------PostOrderTraversal-------------------------------------------------------------------
+
+TreeNode<int>* PostOrderTraversal(TreeNode<int>*root)
+{
+    if(root==nullptr)
+    {
+        return nullptr;
+    }
+
+    for(int i =0; i<root->children.size(); i++)
+    {
+        PostOrderTraversal(root->children[i]);
+    }
+    cout<<root->data<<" ";
+}
 int main()
 {
     // TreeNode<int> *root = new TreeNode<int>(10);
@@ -289,6 +305,10 @@ int main()
     PrintTree(root);
     cout<<"Printing level wise .........."<<endl;
     PrintingLevelWise(root);
+    cout<<"/nPreOrder Traversal................."<<endl;
+    PreOrderTraversal(root);
+    cout<<"/nPostOrder Traversal................"<<endl;
+    PostOrderTraversal(root);
     cout<<"Total number of nodes are in this tree is: ";
     cout<<CountNodes(root);
 }
