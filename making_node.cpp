@@ -177,7 +177,7 @@ int getHeight(TreeNode<int>* root) {
     // Write your code here
     if(root==NULL)
     {
-        return;
+        return 0;
     }
     int height{0};
     for(int i =0; i<root->children.size(); i++)
@@ -260,6 +260,23 @@ int getLeafNodeCount(TreeNode<int>* root) {
     return MaxLeaves;
 }
 
+
+//--------------------------PreOrder Traversal----------------------
+
+TreeNode<int>* PreOrderTraversal(TreeNode<int>* root)
+{
+    if(root==NULL)
+    {
+        return NULL;
+    }
+
+    cout<<root->data;
+    for(int i =0; i<root->children.size(); i++)
+    {
+        PreOrderTraversal(root->children[i]);
+    }
+}
+
 int main()
 {
     // TreeNode<int> *root = new TreeNode<int>(10);
@@ -268,7 +285,9 @@ int main()
     // root->children.push_back(node1);
     // root->children.push_back(node2);
     TreeNode<int> *root = takeInputLevelWise();
+    cout<<"Printing Tree.........."<<endl;
     PrintTree(root);
+    cout<<"Printing level wise .........."<<endl;
     PrintingLevelWise(root);
     cout<<"Total number of nodes are in this tree is: ";
     cout<<CountNodes(root);
