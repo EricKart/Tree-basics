@@ -125,6 +125,141 @@ int CountNodes(TreeNode<int>*root)
     return CountResult;
 }
 
+//-----------------------------------Sum of all Nodes------------------------
+
+int SumOfNodes(TreeNode<int>*root)
+{
+    queue<TreeNode<int>*> PendingNodes;
+    PendingNodes.push(root);
+    int Sum=root->data;
+    while(PendingNodes.size()!=0)
+    {
+        //TreeNode<int>*front = PendingNodes.front();
+        PendingNodes.pop();
+        for(int i =0; i<root->children.size(); i++)
+        {
+            PendingNodes.push(root->children[i]);
+            Sum+=root->children[i]->data;
+        }
+        root=PendingNodes.front();
+    }
+    cout<<Sum;
+}
+
+//------------------------------------------------------Maximum value node----------------------------------------
+
+TreeNode<int>* maxNode(TreeNode<int> *root)
+{
+    if(root==nullptr)
+    {
+        return nullptr;
+    }
+
+    int max_node = root->data;
+    TreeNode<int>* result = root;
+
+    for(int i =0;i<root->children.size(); i++)
+    {
+        TreeNode<int> *temp = maxNode(root->children[i]);
+
+        if(max_node<temp->data)
+        {
+            max_node = temp->data;
+            result = temp;
+        }
+    }
+    return result;
+}
+
+//--------------------------------------------------Height of tree------------------------------------------------
+
+int getHeight(TreeNode<int>* root) {
+    // Write your code here
+    if(root==NULL)
+    {
+        return;
+    }
+    int height{0};
+    for(int i =0; i<root->children.size(); i++)
+    {
+        int max_height = getHeight(root->children[i]);
+        if(max_height>=height){
+            height=max_height;
+        }
+    }
+    return height+1;
+}
+
+
+//-------------------------------------------------Depth of tree------------------------------------------------------------
+
+int Depth_Tree(TreeNode<int> *root, TreeNode<int>*Node)
+{
+    if(root==NULL)
+    {
+        return 0;
+    }
+
+    int depth{0};
+    for(int i =0; i<root->children.size(); i++)
+    {
+        int current_depth{0};
+        if(Node==root)
+        {
+            
+            depth = current_depth;
+        }
+        else{
+            current_depth = Depth_Tree(root->children[i], Node);
+        }
+    }
+    return depth+1;
+}
+
+
+//------------------------------------------------------Printing all nodes at particular depth-------------------------------------------
+
+
+void PrintNodes_atDepth(TreeNode<int>*root, int k)//k is depth at which we have to find all nodes and then print them
+{
+    if(root==NULL)
+    {
+        return;
+    }
+    if(k==0)
+    {
+        cout<<root->data<<endl;
+        return;
+    }
+    for(int i =0; i<root->children.size(); i++)
+    {
+        PrintNodes_atDepth(root->children[i], k-1);
+    }
+}
+
+
+//-------------------------------------------Print all leaf nodes----------------------------------------------------
+
+
+int getLeafNodeCount(TreeNode<int>* root) {
+    // Write your code here
+    int MaxLeaves{0};
+    if(root==NULL)
+    {
+        return 0;
+    }
+    if(root->children.size()==0)
+    {
+        return 1;
+    }
+
+    for(int i =0; i<root->children.size(); i++)
+    {
+        MaxLeaves+=getLeafNodeCount(root->children[i]);
+    }
+    return MaxLeaves;
+}
+
 int main()
 {
     // TreeNode<int> *root = new TreeNode<int>(10);
