@@ -293,6 +293,18 @@ TreeNode<int>* PostOrderTraversal(TreeNode<int>*root)
     }
     cout<<root->data<<" ";
 }
+
+
+//....................................deleting nodes of the tree....................................
+
+void deleteTree(TreeNode<int> *root)
+{
+    for(int i =0; i<root->children.size(); i++)
+    {
+        deleteTree(root->children[i]);
+    }
+    delete root;
+}
 int main()
 {
     // TreeNode<int> *root = new TreeNode<int>(10);
